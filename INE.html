@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Geovisor PMA</title>
+  <link rel="stylesheet" href="https://wfp.sharepoint.com/:u:/r/sites/Bolivia/GeoVisor%20PMA/archivos/styles.css?csf=1&web=1&e=EVGXG1" />
+
+  <!-- Leaflet (CDN) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <div style="background-color:#2481bf;">
+        <img style="width: 40px; padding: 1px;"
+          src="https://cdn.wfp.org/guides/ui/assets/v0.0.1/logos/vertical/es/wfp-logo-vertical-white-es.svg"
+          alt="UN World Food Programme">
+      </div>
+      <div class="title"><b>SALVAR VIDAS <br> CAMBIAR VIDAS</b></div>
+    </div>
+
+    <!-- Menú de navegación -->
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html" >Inicio</a></li>
+        <li><a href="clima.html">Impacto</a></li>
+        <li><a href="https://analytics.wfp.org/#/views/WFPDatos/Datos?:iid=1" target="_blank" >Socioeconómicos</a></li>
+        <li><a href="Windy.html">Windy</a></li>
+        <li><a href="INE.html" style="background-color: #3080b68e;">INE Censo</a></li>
+        <li><a href="HungerMap.html">HungerMap</a></li>
+      </ul>
+      <!-- Botón hamburguesa para móviles -->
+      <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+    </nav>
+  </header>
+<iframe src="https://geoportal.ine.gob.bo/" frameborder="0" style="height: 90%; width: 100%;"></iframe>
+ 
+  <footer class="app-footer">
+    © PMA 2025 — Geovisor
+  </footer>
+
+</body>
+
+</html>

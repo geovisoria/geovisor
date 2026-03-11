@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Geovisor PMA</title>
+  <link rel="stylesheet" href="archivos/styles.css" />
+
+  <!-- Leaflet (CDN) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.pm/dist/leaflet.pm.css" />
+<script src="https://unpkg.com/leaflet.pm/dist/leaflet.pm.min.js"></script>
+</head>
+
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <div style="background-color:#2481bf;">
+        <img style="width: 40px; padding: 1px;"
+          src="https://cdn.wfp.org/guides/ui/assets/v0.0.1/logos/vertical/es/wfp-logo-vertical-white-es.svg"
+          alt="UN World Food Programme">
+      </div>
+      <div class="title"><b>SALVAR VIDAS <br> CAMBIAR VIDAS</b></div>
+    </div>
+
+    <!-- Menú de navegación -->
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html" >Inicio</a></li>
+        <li><a href="clima.html" style="background-color: #3080b68e;">Impacto</a></li>
+<li><a href="https://analytics.wfp.org/#/views/WFPDatos/Datos?:iid=1" target="_blank" >Socioeconómicos</a></li>
+        <li><a href="Windy.html">Windy</a></li>
+        <li><a href="INE.html">INE Censo</a></li>
+        <li><a href="HungerMap.html">HungerMap</a></li>
+      </ul>
+      <!-- Botón hamburguesa para móviles -->
+      <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+    </nav>
+
+
+  </header>
+
+  <!-- recuadro capas tematicas -->
+  <main class="app-main">
+    <aside class="sidebar">
+      <section class="panel">
+        <h3>Capas temáticas</h3>
+        <div class="layer-group">
+          <label class="switch">
+            <input type="checkbox" id="municipios" checked />
+            <span>Limites Municipales</span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="climaSenamhi" />
+            <span>Clima SENAMHI</span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="presipita" />
+            <span>Precipitación mDWT</span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="temperatura" />
+            <span>Temperatura mDWT</span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="humedad" />
+            <span>Incendios 2025 Videci</span>
+          </label>
+                    <label class="switch">
+            <input type="checkbox" id="inunda" />
+            <span>Inundaciones 2025 Videci</span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="SagricoG" />
+            <span>Sequia Agricola</span>
+          </label>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="SmeteorologicaG" />
+            <span>Sequia Meteorologica</span>
+          </label>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="AhidrologicoG" />
+            <span>Anegamiento Hidrologico</span>
+          </label>
+
+        </div>
+      </section>
+
+      <!-- descripsion de capas por recuadros -->
+      <section class="panel">
+        <h3>Descripción</h3>
+        <div id="indicators">
+          <div class="indicator">
+            <p style="font-size: 12px;">La información disponible de myDewetra es referencial para las fechas del 6 al
+              9 de marzo.</p>
+          </div>
+          <div class="indicator">
+            <p style="font-size: 12px;">Los limites municipales son referenciales en base a la información de INFO-SPIE.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+    </aside>
+
+    <section id="map" class="map"></section>
+
+    <aside class="details">
+
+      <section class="panel">
+        <h3>Capas base</h3>
+        <div class="layer-group">
+          <label class="switch">
+            <input name="base" type="radio" id="layeropenstr" value="layeropenstr" checked />
+            <span>OpenStreetMap</span>
+          </label>
+          <label class="switch">
+            <input name="base" type="radio" id="layerimagen" value="layerimagen" />
+            <span>Imagen Satelite</span>
+          </label>
+          <label class="switch">
+            <input name="base" type="radio" id="layercarto" value="layercarto" />
+            <span>Carto Dark</span>
+          </label>
+          <label class="switch">
+            <input name="base" type="radio" id="layercartoL" value="layercartoL" />
+            <span>Carto Light</span>
+          </label>
+          <label class="switch">
+            <input name="base" type="radio" id="layeresri" value="layeresri" />
+            <span>Esri World</span>
+          </label>
+        </div>
+      </section>
+      <section class="panel">
+        <img style="width: 170px; margin-left: 10%;" src="archivos/dewetra.jpg" alt="">
+
+      </section>
+      <section class="panel">
+        <img style="width: 170px; margin-left: 10%;" src="archivos/riesgo.jpg" alt="">
+
+      </section>
+    </aside>
+
+  </main>
+
+  <script>
+    document.querySelectorAll('input[name="base"]').forEach(radio => {
+      radio.addEventListener('change', function () {
+        // Primero quitar todas las capas base
+        map.removeLayer(openStreet);
+        map.removeLayer(imagen);
+        map.removeLayer(carto);
+        map.removeLayer(cartoL);
+        map.removeLayer(esri);
+
+        // Luego activar la seleccionada
+        if (this.value === 'openStreet') {
+          map.addLayer(openStreet);
+        } else if (this.value === 'imagen') {
+          map.addLayer(imagen);
+        }
+      });
+    });
+
+  </script>
+
+  <script>
+    const navToggle = document.querySelector(".nav-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+  </script>
+
+
+  <footer class="app-footer">
+    © PMA 2025 — Geovisor
+  </footer>
+
+
+  <script src="data/municipios_0.js"></script>
+  <script src="data/Sequia_Agricola_General_0.js"></script>
+  <script src="data/Sequia_Meteorologica_General_2.js"></script>
+  <script src="data/Anegamiento_Hidrologico_General_4.js"></script>
+  <script src="data/ClimaSenamhi.js"></script>
+  <script src="data/incendios_videci2025_0.js"></script>
+  <script src="data/inundaciones_videci2025_0.js"></script>
+  <script src="archivos/qgis2web_expressions.js"></script>
+  <script src="archivos/appmapclima.js"></script>
+
+</body>
+
+</html>
