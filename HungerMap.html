@@ -32,7 +32,13 @@
         <li><a href="clima.html">Impacto</a></li>
 <li><a href="https://analytics.wfp.org/#/views/WFPDatos/Datos?:iid=1" target="_blank" >Socioeconómicos</a></li>
         <li><a href="Windy.html">Windy</a></li>
-        <li><a href="INE.html">INE Censo</a></li>
+        <li class="dropdown">
+          <a href="#">INE Censo ▾</a>
+          <ul class="dropdown-content">
+            <li><a href="geoportal.html">Geoportal</a></li>
+            <li><a href="Ineresultados.html">Principales resultados</a></li>
+          </ul>
+        </li>
         <li><a href="HungerMap.html" style="background-color: #3080b68e;">HungerMap</a></li>
       </ul>
       <!-- Botón hamburguesa para móviles -->
@@ -40,6 +46,18 @@
     </nav>
 
   </header>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const dropdown = document.querySelector(".dropdown > a");
+      const menu = document.querySelector(".dropdown-content");
+
+      dropdown.addEventListener("click", (e) => {
+        e.preventDefault(); // evita que recargue la página
+        menu.classList.toggle("show");
+      });
+    });
+  </script>
 <iframe src="https://hungermap.wfp.org/" frameborder="0" style="height: 90%; width: 100%;"></iframe>
  
   <footer class="app-footer">
