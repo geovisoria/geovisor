@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+  <title>Geovisor PMA</title>
+  <link rel="stylesheet" href="archivos/styles.css" />
+
+  <!-- Leaflet (CDN) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+
+  <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
+
+  <script src="https://unpkg.com/shpjs@latest/dist/shp.min.js"></script>
+</head>
+
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <div style="background-color:#2481bf;">
+        <img style="width: 40px; padding: 1px;"
+          src="https://cdn.wfp.org/guides/ui/assets/v0.0.1/logos/vertical/es/wfp-logo-vertical-white-es.svg"
+          alt="UN World Food Programme">
+      </div>
+      <div class="title"><b>SALVAR VIDAS <br> CAMBIAR VIDAS</b></div>
+    </div>
+
+    <!-- Menú de navegación -->
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="clima.html">Impacto</a></li>
+        <li><a href="https://analytics.wfp.org/#/views/WFPDatos/Datos?:iid=1" target="_blank">Socioeconómicos</a></li>
+        <li><a href="Windy.html" style="background-color: #3080b68e;">Windy</a></li>
+        <li class="dropdown">
+          <a href="#">INE Censo ▾</a>
+          <ul class="dropdown-content">
+            <li><a href="geoportal.html">Geoportal</a></li>
+            <li><a href="Ineresultados.html">Principales resultados</a></li>
+          </ul>
+        </li>
+        <li><a href="HungerMap.html">HungerMap</a></li>
+      </ul>
+      <!-- Botón hamburguesa para móviles -->
+      <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+    </nav>
+
+
+  </header>
+
+  <!-- recuadro capas tematicas -->
+  <main class="app-main">
+    <aside class="sidebar">
+      <section class="panel">
+        <h3>Capas temáticas</h3>
+        <div class="layer-group">
+          <label class="switch">
+            <input type="checkbox" id="municipios" checked />
+            <span>Limites Municipales</span>
+          </label>
+
+        </div>
+      </section>
+
+      <!-- descripsion de capas por recuadros -->
+      <section class="panel">
+        <h3>Descripción</h3>
+        <div id="indicators">
+          <div class="indicator">
+            <p>Sube tu archivo (GeoJSON o Shapefile .zip)</p> <br>
+            <label for="fileInput" class="custom-upload">📂 Seleccionar archivo</label>
+            <input type="file" id="fileInput" accept=".geojson,.json,.zip" style="display:none;" />
+          </div>
+          <div class="indicator">
+            <p style="font-size: 12px;">Los limites municipales son referenciales en base a la información de INFO-SPIE.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+    </aside>
+
+    <section id="windy" class="windy"></section>
+
+    <aside class="details">
+
+      <section class="panel">
+        <h3>Capas Cargadas</h3>
+        <div id="layerControls" class="layer-group">
+          <label class="switch">
+          </label>
+
+        </div>
+    </aside>
+
+  </main>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const dropdown = document.querySelector(".dropdown > a");
+      const menu = document.querySelector(".dropdown-content");
+
+      dropdown.addEventListener("click", (e) => {
+        e.preventDefault(); // evita que recargue la página
+        menu.classList.toggle("show");
+      });
+    });
+  </script>
+
+
+  <script>
+    const navToggle = document.querySelector(".nav-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+  </script>
+
+
+  <footer class="app-footer">
+    © PMA 2025 — Geovisor
+  </footer>
+
+
+  <script src="data/municipios_0.js"></script>
+  <script src="data/windy.js"></script>
+
+
+
+</body>
+
+</html>
