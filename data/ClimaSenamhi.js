@@ -1,4 +1,4 @@
-[
+let estaciones = [
     {
         "estacion": "Anzaldo",
         "departamento": "Cochabamba",
